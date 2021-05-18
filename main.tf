@@ -30,7 +30,7 @@ locals {
     for name, ssh_key in local.ssh_keys : name => merge(ssh_key, {
       public_key_file = pathexpand(ssh_key.public_key)
     }) if(try(ssh_key.public_key, null) != null && ssh_key.public_key != "" &&
-         can(regex("^[/~]", trimspace(ssh_key.public_key))))
+         can(regex("^[\\/~]", trimspace(ssh_key.public_key))))
   }
 
   # Build a map of all provided SSH key objects to be used verbatim, indexed by
@@ -38,7 +38,7 @@ locals {
   use_keys      = {
     for name, ssh_key in local.ssh_keys : name => ssh_key
       if(try(ssh_key.public_key, null) != null && ssh_key.public_key != "" &&
-        can(regex("^[^/~]", trimspace(ssh_key.public_key))))
+        can(regex("^[^\\/~]", trimspace(ssh_key.public_key))))
   }
 
   # Build a map of all resulting SSH key objects, indexed by SSH key name:
