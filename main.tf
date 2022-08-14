@@ -71,10 +71,10 @@ resource "tls_private_key" "ssh_keys" {
   ecdsa_curve = each.value.ecdsa_curve
 }
 
-resource "local_file" "ssh_private_keys" {
+resource "local_sensitive_file" "ssh_private_keys" {
   for_each             = local.generate_keys
 
-  sensitive_content    = tls_private_key.ssh_keys[each.key].private_key_pem
+  content              = tls_private_key.ssh_keys[each.key].private_key_pem
   filename             = each.value.private_key_file
   file_permission      = var.ssh_private_key_perms
   directory_permission = var.ssh_key_path_perms

@@ -11,6 +11,7 @@ It implements the following [provider](#providers) resources:
 
 - [hcloud\_ssh\_key](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/ssh_key)
 - [local\_file](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file)
+- [local\_sensitive\_file](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/sensitive_file)
 - [tls\_private\_key](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key)
 
 :warning: **WARNING**: SSH private keys will be stored unencrypted in the [Terraform state](https://www.terraform.io/docs/state). Using generated SSH keys in production deployments is therefore not recommended. Instead, create and distribute SSH keys outside of Terraform and just import the SSH public keys into Terraform.
@@ -80,7 +81,7 @@ module "ssh_key" {
 | Name | Version |
 |------|---------|
 | [hcloud](https://registry.terraform.io/providers/hetznercloud/hcloud) | &ge; 1.20 |
-| [local](https://registry.terraform.io/providers/hashicorp/local) | &ge; 1.4 |
+| [local](https://registry.terraform.io/providers/hashicorp/local) | &ge; 2.2 |
 | [tls](https://registry.terraform.io/providers/hashicorp/tls) | &ge; 2.1 |
 
 
@@ -137,6 +138,7 @@ ssh_keys = [
   {
     "fingerprint" = "32:1e:71:8f:03:34..."
     "id" = "2173651"
+    "labels" = {}
     "name" = "ssh-key-1"
     "public_key" = "ssh-rsa AAAAB3NzaC..."
   },
@@ -146,6 +148,7 @@ ssh_key_ids = {
   "2173651" = {
     "fingerprint" = "32:1e:71:8f:03:34..."
     "id" = "2173651"
+    "labels" = {}
     "name" = "ssh-key-1"
     "public_key" = "ssh-rsa AAAAB3NzaC..."
   }
@@ -155,6 +158,7 @@ ssh_key_names = {
   "ssh-key-1" = {
     "fingerprint" = "32:1e:71:8f:03:34..."
     "id" = "2173651"
+    "labels" = {}
     "name" = "ssh-key-1"
     "public_key" = "ssh-rsa AAAAB3NzaC..."
   }
